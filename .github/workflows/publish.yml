@@ -141,9 +141,9 @@ jobs:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
-            text: "*JS SDK npm publish v${{ github.ref_name }}*: ${{ needs.publish.result }}\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            text: "*JS SDK npm publish ${{ github.ref_name }}*: ${{ needs.publish.result }}\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             blocks:
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "*JS SDK npm publish v${{ github.ref_name }}*: ${{ needs.publish.result }}\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                  text: "*JS SDK npm publish ${{ github.ref_name }}*: ${{ needs.publish.result }}\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
