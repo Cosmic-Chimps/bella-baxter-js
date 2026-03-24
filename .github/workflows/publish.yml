@@ -12,24 +12,33 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
+      - uses: pnpm/action-setup@v5
 
       - name: Extract version from tag
         id: version
         run: |
-          TAG="${GITHUB_REF_NAME}"
-          VERSION="${TAG#v}"
+          VERSION="${GITHUB_REF_NAME#v}"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Publishing version: $VERSION"
+
+      - name: Verify package.json versions match tag
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          for PKG in packages/kiota-client packages/sdk packages/express packages/nestjs packages/next packages/fastify packages/adonis; do
+            PKG_VERSION=$(python3 -c "import json; print(json.load(open('$PKG/package.json'))['version'])")
+            if [ "$PKG_VERSION" != "$VERSION" ]; then
+              echo "::error::$PKG/package.json version '$PKG_VERSION' != tag version '$VERSION'"
+              exit 1
+            fi
+          done
+          echo "✓ All package.json versions match $VERSION"
 
       - name: Set production API URL
         env:
