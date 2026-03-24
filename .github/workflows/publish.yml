@@ -27,6 +27,14 @@ jobs:
           VERSION="${GITHUB_REF_NAME#v}"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Publishing version: $VERSION"
+          # Detect prerelease (contains a hyphen, e.g. 0.1.1-preview.1)
+          if [[ "$VERSION" == *-* ]]; then
+            DIST_TAG="preview"
+          else
+            DIST_TAG="latest"
+          fi
+          echo "dist-tag=$DIST_TAG" >> "$GITHUB_OUTPUT"
+          echo "Using dist-tag: $DIST_TAG"
 
       - name: Verify package.json versions match tag
         run: |
@@ -71,7 +79,7 @@ jobs:
 
       - name: Publish @bella-baxter/kiota-client
         working-directory: packages/kiota-client
-        run: pnpm publish --access public --no-git-checks
+        run: pnpm publish --access public --no-git-checks --tag ${{ steps.version.outputs.dist-tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -93,7 +101,7 @@ jobs:
 
       - name: Publish @bella-baxter/sdk
         working-directory: packages/sdk
-        run: pnpm publish --access public --no-git-checks
+        run: pnpm publish --access public --no-git-checks --tag ${{ steps.version.outputs.dist-tag }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -115,9 +123,10 @@ jobs:
 
       - name: Publish framework packages
         run: |
+          DIST_TAG="${{ steps.version.outputs.dist-tag }}"
           for PKG in express nestjs next fastify adonis; do
             echo "Publishing @bella-baxter/$PKG..."
-            (cd packages/$PKG && pnpm publish --access public --no-git-checks)
+            (cd packages/$PKG && pnpm publish --access public --no-git-checks --tag "$DIST_TAG")
           done
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
