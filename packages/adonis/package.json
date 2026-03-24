@@ -1,7 +1,7 @@
 {
   "name": "@bella-baxter/adonis",
-  "version": "0.1.0",
-  "description": "Bella Baxter AdonisJS v6 service provider — registers BellaService in the IoC container",
+  "version": "0.1.1-preview.9",
+  "description": "Bella Baxter AdonisJS v6 service provider \u2014 registers BellaService in the IoC container",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit"
@@ -26,6 +28,11 @@
     "typescript": "^5.9.3",
     "@types/node": "^25.5.0"
   },
-  "keywords": ["bella-baxter", "secrets", "adonisjs", "adonis"],
+  "keywords": [
+    "bella-baxter",
+    "secrets",
+    "adonisjs",
+    "adonis"
+  ],
   "license": "MIT"
 }

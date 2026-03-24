@@ -1,7 +1,7 @@
 {
   "name": "@bella-baxter/nestjs",
-  "version": "0.1.0",
-  "description": "Bella Baxter NestJS module — registers BellaConfig as an injectable service",
+  "version": "0.1.1-preview.9",
+  "description": "Bella Baxter NestJS module \u2014 registers BellaConfig as an injectable service",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit"
@@ -30,6 +32,11 @@
     "@nestjs/core": "^11.0.0",
     "reflect-metadata": "^0.2.0"
   },
-  "keywords": ["bella-baxter", "secrets", "nestjs", "module"],
+  "keywords": [
+    "bella-baxter",
+    "secrets",
+    "nestjs",
+    "module"
+  ],
   "license": "MIT"
 }

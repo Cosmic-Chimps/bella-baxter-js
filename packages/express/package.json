@@ -1,7 +1,7 @@
 {
   "name": "@bella-baxter/express",
-  "version": "0.1.0",
-  "description": "Bella Baxter Express.js middleware — injects live-reloading secrets onto req.bella",
+  "version": "0.1.1-preview.9",
+  "description": "Bella Baxter Express.js middleware \u2014 injects live-reloading secrets onto req.bella",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit"
@@ -27,6 +29,11 @@
     "@types/node": "^25.5.0",
     "@types/express": "^5.0.6"
   },
-  "keywords": ["bella-baxter", "secrets", "express", "middleware"],
+  "keywords": [
+    "bella-baxter",
+    "secrets",
+    "express",
+    "middleware"
+  ],
   "license": "MIT"
 }
