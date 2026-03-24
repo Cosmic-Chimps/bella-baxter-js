@@ -1,0 +1,31 @@
+{
+  "name": "@bella-baxter/next",
+  "version": "0.1.0",
+  "description": "Bella Baxter Next.js integration — load secrets in instrumentation.ts and access anywhere server-side",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bella-baxter/sdk": "workspace:*"
+  },
+  "peerDependencies": {
+    "next": ">=14"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^25.5.0"
+  },
+  "keywords": ["bella-baxter", "secrets", "nextjs", "next"],
+  "license": "MIT"
+}

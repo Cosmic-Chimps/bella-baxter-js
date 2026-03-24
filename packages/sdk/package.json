@@ -1,0 +1,30 @@
+{
+  "name": "@bella-baxter/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript client for the Bella Baxter API — wraps Kiota-generated client with auth + E2EE",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bella-baxter/kiota-client": "workspace:*",
+    "@microsoft/kiota-abstractions": "^1.0.0-0",
+    "@microsoft/kiota-http-fetchlibrary": "^1.0.0-0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^25.5.0"
+  },
+  "keywords": ["bella-baxter", "sdk", "secrets", "openapi"],
+  "license": "MIT"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@bella-baxter/adonis",
+  "version": "0.1.0",
+  "description": "Bella Baxter AdonisJS v6 service provider — registers BellaService in the IoC container",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bella-baxter/sdk": "workspace:*"
+  },
+  "peerDependencies": {
+    "@adonisjs/core": ">=6"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^25.5.0"
+  },
+  "keywords": ["bella-baxter", "secrets", "adonisjs", "adonis"],
+  "license": "MIT"
+}

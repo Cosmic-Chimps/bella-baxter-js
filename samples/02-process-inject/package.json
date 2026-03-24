@@ -1,0 +1,10 @@
+{
+  "name": "bella-sample-process-inject",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "start": "bella run -p my-project -e production -- node app.js",
+    "dev": "bella run -p my-project -e development -- node app.js"
+  }
+}

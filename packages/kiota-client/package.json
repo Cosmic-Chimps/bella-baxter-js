@@ -1,0 +1,37 @@
+{
+  "name": "@bella-baxter/kiota-client",
+  "version": "0.1.0",
+  "description": "Kiota-generated TypeScript client for the full Bella Baxter API — used by CLI and JS consumers",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@microsoft/kiota-abstractions": "^1.0.0-0",
+    "@microsoft/kiota-http-fetchlibrary": "^1.0.0-0",
+    "@microsoft/kiota-serialization-json": "^1.0.0-0",
+    "@microsoft/kiota-serialization-text": "^1.0.0-0",
+    "@microsoft/kiota-serialization-form": "^1.0.0-0",
+    "@microsoft/kiota-serialization-multipart": "^1.0.0-0",
+    "@microsoft/kiota-authentication-azure": "^1.0.0-0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^25.5.0"
+  },
+  "keywords": ["bella-baxter", "sdk", "kiota", "openapi"],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

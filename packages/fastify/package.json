@@ -1,0 +1,34 @@
+{
+  "name": "@bella-baxter/fastify",
+  "version": "0.1.0",
+  "description": "Bella Baxter Fastify plugin — decorates the Fastify instance with live-reloading secrets",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bella-baxter/sdk": "workspace:*"
+  },
+  "peerDependencies": {
+    "fastify": ">=4",
+    "fastify-plugin": ">=4"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "@types/node": "^25.5.0",
+    "fastify": "^5.8.2",
+    "fastify-plugin": "^5.1.0"
+  },
+  "keywords": ["bella-baxter", "secrets", "fastify", "plugin"],
+  "license": "MIT"
+}

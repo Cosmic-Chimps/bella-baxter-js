@@ -1,0 +1,13 @@
+{
+  "name": "bella-sample-dotenv",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "start": "bella secrets get -p my-project -e production -o .env && node app.js",
+    "dev": "bella secrets get -p my-project -e development -o .env && node app.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}

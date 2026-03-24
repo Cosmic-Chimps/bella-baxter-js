@@ -1,0 +1,16 @@
+{
+  "name": "bella-sample-express",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "@bella-baxter/config": "workspace:*",
+    "@bella-baxter/sdk": "workspace:*",
+    "@bella-baxter/kiota-client": "workspace:*"
+  }
+}

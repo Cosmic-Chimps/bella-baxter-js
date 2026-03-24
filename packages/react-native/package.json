@@ -1,0 +1,31 @@
+{
+  "name": "@bella-baxter/react-native",
+  "version": "0.1.0",
+  "description": "Bella Baxter SDK for React Native — typed secrets, encrypted cache, live polling",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.73.0",
+    "@bella-baxter/sdk": "workspace:*",
+    "react-native-encrypted-storage": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-native-encrypted-storage": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/react": "^18.3.0",
+    "@types/react-native": "^0.73.0"
+  },
+  "files": ["dist"],
+  "keywords": ["bella-baxter", "secrets", "react-native", "vault"],
+  "license": "MIT"
+}
