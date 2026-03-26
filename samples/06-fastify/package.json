@@ -8,7 +8,7 @@
     "dev": "node --watch --loader ts-node/esm server.ts"
   },
   "dependencies": {
-    "fastify": "^5.8.2",
+    "fastify": "^5.8.3",
     "fastify-plugin": "^5.1.0",
     "@bella-baxter/config": "workspace:*"
   },
