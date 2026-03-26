@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/express",
-  "version": "0.1.1-preview.22",
+  "version": "0.1.1-preview.23",
   "description": "Bella Baxter Express.js middleware \u2014 injects live-reloading secrets onto req.bella",
   "type": "module",
   "main": "./dist/index.js",
