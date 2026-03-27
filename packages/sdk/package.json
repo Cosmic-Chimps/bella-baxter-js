@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/sdk",
-  "version": "0.1.1-preview.29",
+  "version": "0.1.1-preview.30",
   "description": "TypeScript client for the Bella Baxter API \u2014 wraps Kiota-generated client with auth + E2EE",
   "type": "module",
   "main": "./dist/index.js",
