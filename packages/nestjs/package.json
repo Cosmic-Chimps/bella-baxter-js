@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/nestjs",
-  "version": "0.1.1-preview.31",
+  "version": "0.1.1-preview.32",
   "description": "Bella Baxter NestJS module \u2014 registers BellaConfig as an injectable service",
   "type": "module",
   "main": "./dist/index.js",
