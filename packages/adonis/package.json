@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/adonis",
-  "version": "0.1.1-preview.35",
+  "version": "0.1.1-preview.36",
   "description": "Bella Baxter AdonisJS v6 service provider \u2014 registers BellaService in the IoC container",
   "type": "module",
   "main": "./dist/index.js",
