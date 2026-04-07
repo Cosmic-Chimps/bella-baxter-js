@@ -8,14 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^16.2.0",
+    "next": "^16.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "@bella-baxter/config": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
-    "@types/react": "^19.0.0",
-    "typescript": "^5.9.3"
+    "@types/react": "^19.2.14",
+    "typescript": "^6.0.2"
   }
 }

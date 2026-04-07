@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/next",
-  "version": "0.1.1-preview.36",
+  "version": "0.1.1-preview.37",
   "description": "Bella Baxter Next.js integration \u2014 load secrets in instrumentation.ts and access anywhere server-side",
   "type": "module",
   "main": "./dist/index.js",
@@ -12,6 +12,7 @@
     }
   },
   "files": [
+    "README.md",
     "dist"
   ],
   "scripts": {
@@ -25,7 +26,7 @@
     "next": ">=14"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.2",
     "@types/node": "^25.5.0"
   },
   "keywords": [
@@ -34,5 +35,14 @@
     "nextjs",
     "next"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter.git",
+    "directory": "apps/sdk/js/packages/next"
+  },
+  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter/tree/main/apps/sdk/js/packages/next#readme",
+  "bugs": {
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter/issues"
+  }
 }

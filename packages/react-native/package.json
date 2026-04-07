@@ -21,11 +21,28 @@
     }
   },
   "devDependencies": {
-    "typescript": "^5.4.0",
-    "@types/react": "^18.3.0",
+    "typescript": "^6.0.2",
+    "@types/react": "^19.2.14",
     "@types/react-native": "^0.73.0"
   },
-  "files": ["dist"],
-  "keywords": ["bella-baxter", "secrets", "react-native", "vault"],
-  "license": "MIT"
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "keywords": [
+    "bella-baxter",
+    "secrets",
+    "react-native",
+    "vault"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter.git",
+    "directory": "apps/sdk/js/packages/react-native"
+  },
+  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter/tree/main/apps/sdk/js/packages/react-native#readme",
+  "bugs": {
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter/issues"
+  }
 }

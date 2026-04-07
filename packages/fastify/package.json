@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/fastify",
-  "version": "0.1.1-preview.36",
+  "version": "0.1.1-preview.37",
   "description": "Bella Baxter Fastify plugin \u2014 decorates the Fastify instance with live-reloading secrets",
   "type": "module",
   "main": "./dist/index.js",
@@ -12,6 +12,7 @@
     }
   },
   "files": [
+    "README.md",
     "dist"
   ],
   "scripts": {
@@ -37,5 +38,14 @@
     "fastify",
     "plugin"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter.git",
+    "directory": "apps/sdk/js/packages/fastify"
+  },
+  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter/tree/main/apps/sdk/js/packages/fastify#readme",
+  "bugs": {
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter/issues"
+  }
 }

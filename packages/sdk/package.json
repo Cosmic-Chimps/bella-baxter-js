@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/sdk",
-  "version": "0.1.1-preview.36",
+  "version": "0.1.1-preview.37",
   "description": "TypeScript client for the Bella Baxter API \u2014 wraps Kiota-generated client with auth + E2EE",
   "type": "module",
   "main": "./dist/index.js",
@@ -12,6 +12,7 @@
     }
   },
   "files": [
+    "README.md",
     "dist"
   ],
   "scripts": {
@@ -24,7 +25,7 @@
     "@microsoft/kiota-http-fetchlibrary": "^1.0.0-0"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.2",
     "@types/node": "^25.5.0"
   },
   "keywords": [
@@ -33,5 +34,14 @@
     "secrets",
     "openapi"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter.git",
+    "directory": "apps/sdk/js/packages/sdk"
+  },
+  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter/tree/main/apps/sdk/js/packages/sdk#readme",
+  "bugs": {
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter/issues"
+  }
 }

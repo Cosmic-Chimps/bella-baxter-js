@@ -82,6 +82,51 @@ export class E2EKeyPair {
   }
 
   /**
+   * Create an E2EKeyPair from a PKCS#8 PEM private key (ZKE persistent device key).
+   * Use this instead of `generate()` when `privateKey` is set in BellaSdkOptions.
+   */
+  static async fromPkcs8Pem(pem: string): Promise<E2EKeyPair> {
+    const subtle = getSubtle();
+
+    // Strip PEM header/footer and whitespace, decode base64 to DER
+    const b64 = pem.replace(/-----[A-Z ]+-----|[\r\n\s]/g, '');
+    const der = b64Decode(b64);
+
+    // Import as non-extractable ECDH key (used for DeriveKey operations)
+    const privateKey = await subtle.importKey(
+      'pkcs8',
+      der.buffer as ArrayBuffer,
+      { name: 'ECDH', namedCurve: 'P-256' },
+      false,  // non-extractable
+      ['deriveKey', 'deriveBits'],
+    );
+
+    // Derive the public key: import extractable copy → export as JWK →
+    // strip private component (d) → re-import as public key → export SPKI.
+    // (WebCrypto has no direct "get public key from private key" API.)
+    const extractable = await subtle.importKey(
+      'pkcs8',
+      der.buffer as ArrayBuffer,
+      { name: 'ECDH', namedCurve: 'P-256' },
+      true,  // extractable — only for the JWK round-trip below
+      ['deriveKey', 'deriveBits'],
+    );
+    const jwk = await subtle.exportKey('jwk', extractable);
+    // Remove the private scalar to obtain a public key JWK
+    const { d: _d, ...publicJwk } = jwk;
+    const publicKey = await subtle.importKey(
+      'jwk',
+      publicJwk,
+      { name: 'ECDH', namedCurve: 'P-256' },
+      true,
+      [],
+    );
+    const spki = await subtle.exportKey('spki', publicKey);
+
+    return new E2EKeyPair(privateKey, b64Encode(spki));
+  }
+
+  /**
    * Decrypt an encrypted secrets payload from the Bella Baxter API.
    *
    * @returns Decrypted ``{ key: value }`` secrets map.

@@ -34,6 +34,23 @@ export interface BellaSdkOptions {
    * Example: "my-express-api", "github-ci-deploy"
    */
   appClient?: string;
+  /**
+   * PKCS#8 PEM private key for ZKE (Zero-Knowledge Encryption) transport.
+   * When set, uses a persistent device key instead of generating an ephemeral one per init().
+   * Supply via BELLA_BAXTER_PRIVATE_KEY env var or set directly.
+   * Obtain with: bella auth setup
+   */
+  privateKey?: string;
+  /**
+   * Called when the server returns X-Bella-Wrapped-Dek on a secrets response.
+   * Use this to cache the wrapped DEK for future offline use.
+   */
+  onWrappedDekReceived?: (
+    projectSlug: string,
+    envSlug: string,
+    wrappedDek: string,
+    leaseExpires?: Date,
+  ) => void;
 }
 
 export interface AllEnvironmentSecretsResponse {
@@ -133,10 +150,10 @@ export class BaxterClient {
     };
   }
 
-  private async fetchJson<T>(
+  private async fetchJsonFull<T>(
     path: string,
     extraHeaders?: Record<string, string>,
-  ): Promise<T> {
+  ): Promise<{ data: T; headers: Headers }> {
     const url = `${this.baseUrl}${path}`;
     const sigHeaders = await this.sign('GET', path);
     let resp: Response;
@@ -181,15 +198,32 @@ export class BaxterClient {
         : `Bella API error ${resp.status}: ${path}`;
       throw new Error(msg);
     }
-    return resp.json() as Promise<T>;
+    const data = await resp.json() as T;
+    return { data, headers: resp.headers };
+  }
+
+  private async fetchJson<T>(
+    path: string,
+    extraHeaders?: Record<string, string>,
+  ): Promise<T> {
+    return (await this.fetchJsonFull<T>(path, extraHeaders)).data;
   }
 
   /**
-   * Initialize the client (generates E2EE keypair).
+   * Initialize the client.
+   * Imports the persistent device key (ZKE) when `privateKey` / `BELLA_BAXTER_PRIVATE_KEY`
+   * is set; otherwise generates a fresh ephemeral E2EE keypair.
    * Call once before use, or use {@link createBaxterClient} which calls it automatically.
    */
   async init(): Promise<this> {
-    this.e2ee = await E2EKeyPair.generate();
+    const privateKey =
+      this.options.privateKey ??
+      (typeof process !== 'undefined' ? process.env['BELLA_BAXTER_PRIVATE_KEY'] : undefined);
+    if (privateKey) {
+      this.e2ee = await E2EKeyPair.fromPkcs8Pem(privateKey);
+    } else {
+      this.e2ee = await E2EKeyPair.generate();
+    }
     return this;
   }
 
@@ -211,10 +245,12 @@ export class BaxterClient {
       'X-E2E-Public-Key': this.e2ee.publicKeyB64,
     };
 
-    const raw = await this.fetchJson<Record<string, unknown>>(
+    const { data: raw, headers } = await this.fetchJsonFull<Record<string, unknown>>(
       path,
       extraHeaders,
     );
+
+    let result: AllEnvironmentSecretsResponse;
 
     if (isE2EPayload(raw)) {
       const parsed = await this.e2ee.decryptRaw(raw as any) as Record<string, unknown>;
@@ -223,20 +259,29 @@ export class BaxterClient {
         parsed && typeof parsed === 'object' && !Array.isArray(parsed) &&
         'secrets' in parsed && typeof parsed['secrets'] === 'object'
       ) {
-        return parsed as unknown as AllEnvironmentSecretsResponse;
+        result = parsed as unknown as AllEnvironmentSecretsResponse;
+      } else {
+        const secrets = await this.e2ee.decrypt(raw as any);
+        result = {
+          environmentSlug: envSlug,
+          environmentName: '',
+          secrets,
+          version: 0,
+          lastModified: new Date().toISOString(),
+        };
       }
-
-      const secrets = await this.e2ee.decrypt(raw as any);
-      return {
-        environmentSlug: envSlug,
-        environmentName: '',
-        secrets,
-        version: 0,
-        lastModified: new Date().toISOString(),
-      };
+    } else {
+      result = raw as unknown as AllEnvironmentSecretsResponse;
     }
 
-    return raw as unknown as AllEnvironmentSecretsResponse;
+    const wrappedDek = headers.get('x-bella-wrapped-dek');
+    if (wrappedDek && this.options.onWrappedDekReceived) {
+      const leaseExpiresStr = headers.get('x-bella-lease-expires');
+      const leaseExpires = leaseExpiresStr ? new Date(leaseExpiresStr) : undefined;
+      this.options.onWrappedDekReceived(projectSlug, envSlug, wrappedDek, leaseExpires);
+    }
+
+    return result;
   }
 
   /**
