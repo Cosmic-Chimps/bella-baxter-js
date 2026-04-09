@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/next",
-  "version": "0.1.1-preview.48",
+  "version": "0.1.1-preview.49",
   "description": "Bella Baxter Next.js integration \u2014 load secrets in instrumentation.ts and access anywhere server-side",
   "type": "module",
   "main": "./dist/index.js",
