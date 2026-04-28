@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/kiota-client",
-  "version": "0.1.1-preview.79",
+  "version": "0.1.1-preview.80",
   "description": "Kiota-generated TypeScript client for the full Bella Baxter API \u2014 used by CLI and JS consumers",
   "type": "module",
   "main": "./dist/index.js",
