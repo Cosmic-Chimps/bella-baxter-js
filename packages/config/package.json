@@ -60,7 +60,7 @@
     "typescript": "^5.9.3",
     "@types/node": "^25.5.0",
     "@types/express": "^5.0.6",
-    "fastify": "^5.8.3",
+    "fastify": "^5.8.5",
     "fastify-plugin": "^5.1.0"
   },
   "keywords": ["bella-baxter", "secrets", "config", "express", "nestjs", "nextjs"],
