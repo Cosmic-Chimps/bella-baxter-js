@@ -56,3 +56,13 @@ export interface BellaProviderSuccessResponse {
 export interface BellaProviderErrorResponse {
   error: string;
 }
+
+/**
+ * Verifies the `X-Bella-Signature` header on an incoming Bella Baxter custom provider request.
+ *
+ * Custom providers use the same signature format as webhooks:
+ *   X-Bella-Signature: t={unix-epoch-seconds},v1={hmac-sha256-hex}
+ *
+ * Alias of `verifyWebhookSignature` provided for custom-provider consumers.
+ */
+export { verifyWebhookSignature as verifyCustomProviderSignature } from './webhook-signature.js';
