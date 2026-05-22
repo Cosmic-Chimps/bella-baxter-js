@@ -24,3 +24,22 @@ export {
   type BellaAuthOptions,
 } from './auth-provider.js';
 export { verifyWebhookSignature } from './webhook-signature.js';
+export {
+  verifyCustomProviderSignature,
+  type BellaProviderAction,
+  type BellaProviderRequest,
+  type BellaProviderListResponse,
+  type BellaProviderGetResponse,
+  type BellaProviderSuccessResponse,
+  type BellaProviderErrorResponse,
+} from './custom-provider.js';
+export {
+  type BellaRotationAction,
+  type BellaRotationRequestBase,
+  type BellaRotateRequest,
+  type BellaRevokeRequest,
+  type BellaRotationRequest,
+  type BellaRotateResponse,
+  type BellaRevokeResponse,
+  type BellaRotationErrorResponse,
+} from './rotator-function.js';
