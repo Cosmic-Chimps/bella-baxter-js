@@ -44,11 +44,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cosmic-Chimps/bella-baxter.git",
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter-js.git",
     "directory": "apps/sdk/js/packages/kiota-client"
   },
-  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter/tree/main/apps/sdk/js/packages/kiota-client#readme",
+  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter-js/tree/main/packages/kiota-client#readme",
   "bugs": {
-    "url": "https://github.com/Cosmic-Chimps/bella-baxter/issues"
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter-js/issues"
   }
 }

@@ -38,11 +38,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cosmic-Chimps/bella-baxter.git",
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter-js.git",
     "directory": "apps/sdk/js/packages/next"
   },
-  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter/tree/main/apps/sdk/js/packages/next#readme",
+  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter-js/tree/main/packages/next#readme",
   "bugs": {
-    "url": "https://github.com/Cosmic-Chimps/bella-baxter/issues"
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter-js/issues"
   }
 }

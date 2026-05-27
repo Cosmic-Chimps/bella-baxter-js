@@ -38,11 +38,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Cosmic-Chimps/bella-baxter.git",
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter-js.git",
     "directory": "apps/sdk/js/packages/adonis"
   },
-  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter/tree/main/apps/sdk/js/packages/adonis#readme",
+  "homepage": "https://github.com/Cosmic-Chimps/bella-baxter-js/tree/main/packages/adonis#readme",
   "bugs": {
-    "url": "https://github.com/Cosmic-Chimps/bella-baxter/issues"
+    "url": "https://github.com/Cosmic-Chimps/bella-baxter-js/issues"
   }
 }
