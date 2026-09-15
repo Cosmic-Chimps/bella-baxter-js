@@ -126,19 +126,8 @@ jobs:
           DIST_TAG="${{ steps.version.outputs.dist-tag }}"
           for PKG in express nestjs next fastify adonis; do
             echo "Publishing @bella-baxter/$PKG..."
-            (cd packages/$PKG && pnpm publish --access public --no-git-checks --tag "$DIST_TAG")
+            (cd packages/$PKG && pnpm publish --access public --no-git-checks --tag latest)
           done
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # `npm install @bella-baxter/sdk` installs whatever `latest` points at — npm has no
-      # prerelease fallback. Publishing previews under `--tag preview` alone left `latest`
-      # on 0.1.1-preview.11 for six months (bella-baxter#732). The script decides per
-      # package and declines once a stable release exists.
-      - name: Promote `latest` to this version
-        run: |
-          python3 scripts/promote-dist-tag.py "${{ steps.version.outputs.version }}" \
-            kiota-client sdk express nestjs next fastify adonis
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
