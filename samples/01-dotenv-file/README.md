@@ -30,7 +30,7 @@ bella login          # opens browser; requires .bella file or -p/-e flags for pr
 
 **CI/CD (API key — billed per call):**
 ```bash
-bella login --api-key bax-<keyId>-<secret>   # key encodes project + env; .bella auto-created
+bella login   # key encodes project + env; .bella auto-created
 ```
 
 > **Self-hosted Bella Baxter?** Also set: `export BELLA_BAXTER_URL=https://your-bella-instance.com`

@@ -8,9 +8,9 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
-    "express": "^5.2.1",
-    "@bella-baxter/config": "workspace:*",
+    "@bella-baxter/express": "workspace:*",
+    "@bella-baxter/kiota-client": "workspace:*",
     "@bella-baxter/sdk": "workspace:*",
-    "@bella-baxter/kiota-client": "workspace:*"
+    "express": "^5.2.1"
   }
 }

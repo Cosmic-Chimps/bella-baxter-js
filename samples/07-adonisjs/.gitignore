@@ -1,0 +1,16 @@
+# #733 — this file exists to UN-ignore, and that is the whole point.
+#
+# The repository root .gitignore carries `*.js` (line ~1104) and `**/[Bb]in/*` (line ~94), both
+# aimed at build output elsewhere. In an AdonisJS app they match the application's own SOURCE:
+# ace.js is the entrypoint every npm script invokes, and bin/ holds the server and console
+# bootstraps. So when this sample was added, git dropped exactly the three files that make it
+# runnable, and the sample shipped with `dev`, `start` and `build` all pointing at nothing.
+#
+# Negation works here because the root patterns exclude FILES within bin/ rather than the
+# directory itself — a directory excluded outright cannot be re-included by a later rule.
+!ace.js
+!bin/
+!bin/*.ts
+
+# Real build output, which should stay ignored.
+build/

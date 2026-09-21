@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBellaMiddleware } from '@bella-baxter/config/express';
+import { createBellaMiddleware } from '@bella-baxter/express';
 
 const app = express();
 

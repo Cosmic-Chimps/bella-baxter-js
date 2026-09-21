@@ -8,10 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@bella-baxter/next": "workspace:*",
     "next": "^16.2.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "@bella-baxter/config": "workspace:*"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",

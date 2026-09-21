@@ -223,9 +223,9 @@ importers:
 
   samples/03-express:
     dependencies:
-      '@bella-baxter/config':
+      '@bella-baxter/express':
         specifier: workspace:*
-        version: link:../../packages/config
+        version: link:../../packages/express
       '@bella-baxter/kiota-client':
         specifier: workspace:*
         version: link:../../packages/kiota-client
@@ -238,9 +238,9 @@ importers:
 
   samples/04-nestjs:
     dependencies:
-      '@bella-baxter/config':
+      '@bella-baxter/nestjs':
         specifier: workspace:*
-        version: link:../../packages/config
+        version: link:../../packages/nestjs
       '@nestjs/common':
         specifier: ^11.1.17
         version: 11.1.17(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -269,9 +269,9 @@ importers:
 
   samples/05-nextjs:
     dependencies:
-      '@bella-baxter/config':
+      '@bella-baxter/next':
         specifier: workspace:*
-        version: link:../../packages/config
+        version: link:../../packages/next
       next:
         specifier: ^16.2.1
         version: 16.2.2(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -294,9 +294,9 @@ importers:
 
   samples/06-fastify:
     dependencies:
-      '@bella-baxter/config':
+      '@bella-baxter/fastify':
         specifier: workspace:*
-        version: link:../../packages/config
+        version: link:../../packages/fastify
       fastify:
         specifier: ^5.8.3
         version: 5.8.3
@@ -319,9 +319,9 @@ importers:
       '@adonisjs/core':
         specifier: ^7.1.1
         version: 7.1.1(@adonisjs/assembler@8.4.0(typescript@6.0.2))(@vinejs/vine@4.3.0)(edge.js@6.5.0)(pino-pretty@13.1.3)(youch@4.1.0)
-      '@bella-baxter/config':
+      '@bella-baxter/adonis':
         specifier: workspace:*
-        version: link:../../packages/config
+        version: link:../../packages/adonis
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -338,6 +338,9 @@ importers:
       '@types/node':
         specifier: ~25.5.0
         version: 25.5.0
+      ts-node-maintained:
+        specifier: ^10.9.6
+        version: 10.9.6(@swc/core@1.15.18(@swc/helpers@0.5.19))(@types/node@25.5.0)(typescript@6.0.2)
       typescript:
         specifier: ~6.0.2
         version: 6.0.2
@@ -3430,6 +3433,20 @@ packages:
 
   ts-morph@27.0.2:
     resolution: {integrity: sha512-fhUhgeljcrdZ+9DZND1De1029PrE+cMkIP7ooqkLRTrRLTqcki2AstsyJm0vRNbTbVCNJ0idGlbBrfqc7/nA8w==}
+
+  ts-node-maintained@10.9.6:
+    resolution: {integrity: sha512-m/1ZCksNnIofWjmY5/K+6y8oia05Y/5+vMWTvuFzrr6UGRV7ImrLMyYAB06cHlwBW5/NuYeZoh44mAOGNRNxZA==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
 
   ts-node@10.9.2:
     resolution: {integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==}
@@ -7089,6 +7106,26 @@ snapshots:
     dependencies:
       '@ts-morph/common': 0.28.1
       code-block-writer: 13.0.3
+
+  ts-node-maintained@10.9.6(@swc/core@1.15.18(@swc/helpers@0.5.19))(@types/node@25.5.0)(typescript@6.0.2):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.12
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 25.5.0
+      acorn: 8.16.0
+      acorn-walk: 8.3.5
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.4
+      make-error: 1.3.6
+      typescript: 6.0.2
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    optionalDependencies:
+      '@swc/core': 1.15.18(@swc/helpers@0.5.19)
 
   ts-node@10.9.2(@swc/core@1.15.18(@swc/helpers@0.5.19))(@types/node@25.5.0)(typescript@5.9.3):
     dependencies:

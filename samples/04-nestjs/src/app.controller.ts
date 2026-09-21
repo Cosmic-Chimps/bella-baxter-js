@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { BellaConfigService } from '@bella-baxter/config/nestjs';
+import { BellaConfigService } from '@bella-baxter/nestjs';
 
 const mask = (v: string | undefined, n = 4) => (v && v.length > n ? `${v.slice(0, n)}***` : v ?? '(not set)');
 

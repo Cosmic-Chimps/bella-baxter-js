@@ -154,10 +154,10 @@ check_cli_secrets "02" "$OUTPUT"
 popd > /dev/null
 
 # ─── 03: express ────────────────────────────────────────────────────────────
-section "03 -- express (bella exec -- node server.js)"
+section "03 -- express (bella sdk run -- node server.js)"
 cleanup_port
 pushd "$SAMPLES_DIR/03-express" > /dev/null
-bella exec --app js-03-express -- node server.js &
+bella sdk run --app js-03-express -- node server.js &
 SERVER_PID=$!
 echo "  Started PID $SERVER_PID -- waiting for server on :$SERVER_PORT..."
 if wait_for_server "$SERVER_PORT" "$SERVER_STARTUP_TIMEOUT"; then
@@ -174,10 +174,10 @@ stop_server
 popd > /dev/null
 
 # ─── 04: nestjs ─────────────────────────────────────────────────────────────
-section "04 -- nestjs (bella exec -- node --loader ts-node/esm src/main.ts)"
+section "04 -- nestjs (bella sdk run -- node --loader ts-node/esm src/main.ts)"
 cleanup_port
 pushd "$SAMPLES_DIR/04-nestjs" > /dev/null
-bella exec --app js-04-nestjs -- node --loader ts-node/esm src/main.ts &
+bella sdk run --app js-04-nestjs -- node --loader ts-node/esm src/main.ts &
 SERVER_PID=$!
 echo "  Started PID $SERVER_PID -- waiting for server on :$SERVER_PORT..."
 if wait_for_server "$SERVER_PORT" "$SERVER_STARTUP_TIMEOUT"; then
@@ -194,10 +194,10 @@ stop_server
 popd > /dev/null
 
 # ─── 05: nextjs ─────────────────────────────────────────────────────────────
-section "05 -- nextjs (bella exec -- npx next dev -p $SERVER_PORT)"
+section "05 -- nextjs (bella sdk run -- npx next dev -p $SERVER_PORT)"
 cleanup_port
 pushd "$SAMPLES_DIR/05-nextjs" > /dev/null
-bella exec --app js-05-nextjs -- npx next dev -p "$SERVER_PORT" &
+bella sdk run --app js-05-nextjs -- npx next dev -p "$SERVER_PORT" &
 SERVER_PID=$!
 echo "  Started PID $SERVER_PID -- waiting for Next.js on :$SERVER_PORT (up to 60s)..."
 if wait_for_server "$SERVER_PORT" 60; then
@@ -214,10 +214,10 @@ stop_server
 popd > /dev/null
 
 # ─── 06: fastify ────────────────────────────────────────────────────────────
-section "06 -- fastify (bella exec -- node --loader ts-node/esm server.ts)"
+section "06 -- fastify (bella sdk run -- node --loader ts-node/esm server.ts)"
 cleanup_port
 pushd "$SAMPLES_DIR/06-fastify" > /dev/null
-bella exec --app js-06-fastify -- node --loader ts-node/esm server.ts &
+bella sdk run --app js-06-fastify -- node --loader ts-node/esm server.ts &
 SERVER_PID=$!
 echo "  Started PID $SERVER_PID -- waiting for server on :$SERVER_PORT..."
 if wait_for_server "$SERVER_PORT" "$SERVER_STARTUP_TIMEOUT"; then
@@ -234,10 +234,10 @@ stop_server
 popd > /dev/null
 
 # ─── 07: adonisjs ───────────────────────────────────────────────────────────
-section "07 -- adonisjs (bella exec -- node ace serve)"
+section "07 -- adonisjs (bella sdk run -- node ace serve)"
 cleanup_port
 pushd "$SAMPLES_DIR/07-adonisjs" > /dev/null
-bella exec --app js-07-adonisjs -- node ace serve < /dev/null &
+bella sdk run --app js-07-adonisjs -- node ace serve < /dev/null &
 SERVER_PID=$!
 echo "  Started PID $SERVER_PID -- waiting for server on :$SERVER_PORT..."
 if wait_for_server "$SERVER_PORT" "$SERVER_STARTUP_TIMEOUT"; then

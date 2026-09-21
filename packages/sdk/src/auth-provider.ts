@@ -20,7 +20,7 @@ export interface BellaAuthOptions {
   /** API key (bax-...) for HMAC-signed auth. Mutually exclusive with accessToken. */
   apiKey?: string;
   /**
-   * JWT access token for Bearer auth (injected by `bella exec` in JWT mode).
+   * JWT access token for Bearer auth (injected by `bella sdk run` in JWT mode).
    * Mutually exclusive with apiKey.
    */
   accessToken?: string;
@@ -67,7 +67,7 @@ export class BellaAuthenticationProvider implements AuthenticationProvider {
 
   constructor(options: BellaAuthOptions) {
     if (options.accessToken) {
-      // Bearer token mode (JWT injected by bella exec)
+      // Bearer token mode (JWT injected by bella sdk run)
       this.accessToken = options.accessToken;
       this.keyId = null;
       this.signingSecret = null;

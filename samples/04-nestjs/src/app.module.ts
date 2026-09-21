@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { BellaModule } from '@bella-baxter/config/nestjs';
+import { BellaModule } from '@bella-baxter/nestjs';
 import { AppController } from './app.controller.js';
 import { BELLA_COERCIONS } from './bella-coercions.js';
 

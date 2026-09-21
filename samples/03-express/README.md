@@ -19,19 +19,19 @@ pnpm install
 ```bash
 bella login                          # opens browser
 cd samples/03-express
-bella exec -- pnpm start             # bella injects credentials; SDK fetches secrets at startup
+bella sdk run -- pnpm start             # bella injects credentials; SDK fetches secrets at startup
 ```
 
 **Option B — CI/CD (API key, billed per call):**
 ```bash
-bella login --api-key bax-<keyId>-<secret>   # .bella auto-created with project + env
+bella login   # .bella auto-created with project + env
 cd samples/03-express
-bella exec -- pnpm start
+bella sdk run -- pnpm start
 ```
 
 > **Self-hosted Bella Baxter?** Also set: `export BELLA_BAXTER_URL=https://your-bella-instance.com`
 
-> `BELLA_BAXTER_PROJECT` and `BELLA_BAXTER_ENV` are only needed if you're **not** using `bella exec` and have no `.bella` file. `bella exec` injects all required credentials automatically.
+> `BELLA_BAXTER_PROJECT` and `BELLA_BAXTER_ENV` are only needed if you're **not** using `bella sdk run` and have no `.bella` file. `bella sdk run` injects all required credentials automatically.
 
 ## How it works
 

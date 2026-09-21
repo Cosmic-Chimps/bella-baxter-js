@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@adonisjs/core": "^7.1.1",
-    "@bella-baxter/config": "workspace:*",
+    "@bella-baxter/adonis": "workspace:*",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
@@ -28,6 +28,7 @@
     "@adonisjs/tsconfig": "^2.0.0",
     "@poppinss/ts-exec": "^1.4.4",
     "@types/node": "~25.5.0",
+    "ts-node-maintained": "^10.9.6",
     "typescript": "~6.0.2"
   }
 }

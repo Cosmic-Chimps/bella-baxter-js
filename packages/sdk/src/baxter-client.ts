@@ -22,7 +22,7 @@ export interface BellaSdkOptions {
    */
   apiKey?: string;
   /**
-   * JWT access token for Bearer auth (injected by `bella exec` in JWT mode).
+   * JWT access token for Bearer auth (injected by `bella sdk run` in JWT mode).
    * Mutually exclusive with apiKey. Falls back to BELLA_BAXTER_ACCESS_TOKEN env var.
    */
   accessToken?: string;

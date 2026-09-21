@@ -1,7 +1,7 @@
 /// <reference path="./bella-secrets.d.ts" />
 
 import Fastify from 'fastify';
-import { bellaPlugin } from '@bella-baxter/config/fastify';
+import { bellaPlugin } from '@bella-baxter/fastify';
 import { BELLA_COERCIONS } from './bella-coercions.js';
 
 const app = Fastify({ logger: true });

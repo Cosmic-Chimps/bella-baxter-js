@@ -16,19 +16,19 @@ pnpm install
 ```bash
 bella login
 cd samples/04-nestjs
-bella exec -- pnpm run dev
+bella sdk run -- pnpm run dev
 ```
 
 **Option B — CI/CD (API key, billed per call):**
 ```bash
-bella login --api-key bax-<keyId>-<secret>   # .bella auto-created with project + env
+bella login   # .bella auto-created with project + env
 cd samples/04-nestjs
-bella exec -- pnpm run dev
+bella sdk run -- pnpm run dev
 ```
 
 > **Self-hosted Bella Baxter?** Also set: `export BELLA_BAXTER_URL=https://your-bella-instance.com`
 
-> `BELLA_BAXTER_PROJECT` and `BELLA_BAXTER_ENV` are only needed if you're **not** using `bella exec` and have no `.bella` file.
+> `BELLA_BAXTER_PROJECT` and `BELLA_BAXTER_ENV` are only needed if you're **not** using `bella sdk run` and have no `.bella` file.
 
 ## How it works
 

@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http';
 import { inject } from '@adonisjs/core';
-import { BellaService } from '@bella-baxter/config/adonis';
+import { BellaService } from '@bella-baxter/adonis';
 
 const mask = (v: string | undefined, n = 4) =>
   v && v.length > n ? `${v.slice(0, n)}***` : v ?? '(not set)';

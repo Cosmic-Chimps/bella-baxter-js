@@ -9,7 +9,7 @@
  *   BELLA_BAXTER_API_KEY  — your API key (bax-<keyId>-<secret>)
  */
 
-import { initBella } from '@bella-baxter/config/next';
+import { initBella } from '@bella-baxter/next';
 import { BELLA_COERCIONS } from './bella-coercions';
 
 export async function register() {

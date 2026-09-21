@@ -4,7 +4,7 @@ export default defineConfig({
   commands: [() => import('@adonisjs/core/commands')],
   providers: [
     () => import('@adonisjs/core/providers/app_provider'),
-    () => import('@bella-baxter/config/adonis'),
+    () => import('@bella-baxter/adonis'),
   ],
   preloads: [
     () => import('#start/routes'),
