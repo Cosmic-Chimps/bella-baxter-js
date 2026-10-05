@@ -9,7 +9,7 @@ import { FetchRequestAdapter } from '@microsoft/kiota-http-fetchlibrary';
 import { BellaClient, createBellaClient } from '@bella-baxter/kiota-client';
 import { BellaAuthenticationProvider } from './auth-provider.js';
 import { E2EKeyPair, toSecretsMap } from './e2ee.js';
-import { openRequiredEnvelope } from './e2ee-response.js';
+import { openRequiredEnvelope, requiresEnvelope } from './e2ee-response.js';
 import { hexToBytes, sha256Hex, hmacSha256Hex } from './webcrypto.js';
 
 // ── Public API types ──────────────────────────────────────────────────────────
@@ -134,10 +134,19 @@ export class BaxterClient {
           : {}),
       };
     }
-    // HMAC mode
+    // HMAC mode — the same canonical form as BellaAuthenticationProvider: path, then the query
+    // parameters sorted by name (a request() path may carry one, e.g. `…/export?format=json`).
+    const qIdx = path.indexOf('?');
+    const bare = qIdx >= 0 ? path.slice(0, qIdx) : path;
+    const query = qIdx >= 0
+      ? [...new URLSearchParams(path.slice(qIdx + 1)).entries()]
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+        .join('&')
+      : '';
     const timestamp = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
     const bodyHash = await sha256Hex(bodyBytes);
-    const stringToSign = `${method}\n${path}\n\n${timestamp}\n${bodyHash}`;
+    const stringToSign = `${method}\n${bare}\n${query}\n${timestamp}\n${bodyHash}`;
     const signature = await hmacSha256Hex(this.signingSecret!, stringToSign);
     return {
       'X-Bella-Key-Id': this.keyId!,
@@ -203,20 +212,52 @@ export class BaxterClient {
     return resp;
   }
 
-  private async fetchJsonFull<T>(
-    path: string,
-    extraHeaders?: Record<string, string>,
-  ): Promise<{ data: T; headers: Headers }> {
-    const resp = await this.fetchOk(path, extraHeaders);
-    const data = await resp.json() as T;
-    return { data, headers: resp.headers };
+  /**
+   * GETs `path` and returns its JSON. The ONE place this client decides E2EE (SDK_CONTRACT.md, "Rule: the
+   * key is presented on every envelope-required read", #1162): when `requiresEnvelope('GET', path)` holds
+   * — one of the seven reads that carry secret values — the request presents `X-E2E-Public-Key` and the
+   * 2xx body MUST be an envelope that opens with this client's key (#1050 b); its plaintext is returned
+   * unchanged. Every other GET is sent without the key and its JSON is returned as is.
+   */
+  private async fetchJsonFull<T>(path: string): Promise<{ data: T; headers: Headers }> {
+    if (!requiresEnvelope('GET', path)) {
+      const resp = await this.fetchOk(path);
+      return { data: await resp.json() as T, headers: resp.headers };
+    }
+    if (!this.e2ee)
+      throw new Error(
+        'BaxterClient not initialized — call init() or use createBaxterClient()',
+      );
+    const resp = await this.fetchOk(path, { 'X-E2E-Public-Key': this.e2ee.publicKeyB64 });
+    const body = await resp.text();
+    // Plain secrets, a tampered envelope or one encrypted to another key is an E2EEResponseError, never a
+    // value. No plaintext branch.
+    const data = await openRequiredEnvelope(this.e2ee, path.split(/[?#]/, 1)[0], body);
+    return { data: data as T, headers: resp.headers };
   }
 
-  private async fetchJson<T>(
-    path: string,
-    extraHeaders?: Record<string, string>,
-  ): Promise<T> {
-    return (await this.fetchJsonFull<T>(path, extraHeaders)).data;
+  private async fetchJson<T>(path: string): Promise<T> {
+    return (await this.fetchJsonFull<T>(path)).data;
+  }
+
+  /**
+   * GETs any Bella API `path` (absolute from the API root, e.g.
+   * `/api/v1/projects/my-app/environments/prod/providers/vault/secrets/DB_PASSWORD`, query string allowed)
+   * through this client's authentication and E2EE pipeline, and returns the parsed JSON.
+   *
+   * Use it for reads that have no typed method here. The seven reads that carry secret VALUES
+   * (`getAllEnvironmentSecrets`, both exports, `listSecrets`, `getSecret`, `getSecretVersion`,
+   * `listGlobalSecrets`) present this client's E2EE key and are decrypted transparently, so the result is
+   * exactly the JSON the API documents for that read. Note that an export answered to a presented key is a
+   * `{ key: value }` object, whatever `format` asks for.
+   *
+   * @throws {E2EEResponseError} when an envelope-required read's 2xx answer is not an envelope that opens
+   *   with this client's key — never returned as plaintext (#1050).
+   */
+  async request<T = unknown>(path: string): Promise<T> {
+    if (!path.startsWith('/'))
+      throw new Error(`BaxterClient.request: path must start with '/' (got '${path}')`);
+    return this.fetchJson<T>(path);
   }
 
   /**
@@ -250,22 +291,9 @@ export class BaxterClient {
     envSlug: string,
   ): Promise<AllEnvironmentSecretsResponse> {
     const path = `/api/v1/projects/${encodeURIComponent(projectSlug)}/environments/${encodeURIComponent(envSlug)}/secrets`;
-    if (!this.e2ee)
-      throw new Error(
-        'BaxterClient not initialized — call init() or use createBaxterClient()',
-      );
-    const extraHeaders: Record<string, string> = {
-      'X-E2E-Public-Key': this.e2ee.publicKeyB64,
-    };
-
-    const resp = await this.fetchOk(path, extraHeaders);
-    const headers = resp.headers;
-    const body = await resp.text();
-
-    // #1050 (b) — the key was presented on an envelope-required read (requiresEnvelope('GET', path)), so
-    // the answer MUST be an envelope that opens with it. Plain secrets, a tampered envelope or one
-    // encrypted to another key is an E2EEResponseError, never a value. No plaintext branch.
-    const parsed = await openRequiredEnvelope(this.e2ee, path, body);
+    // An envelope-required read: fetchJsonFull presents the key and refuses anything but an envelope that
+    // opens with it (#1050 b, #1162).
+    const { data: parsed, headers } = await this.fetchJsonFull<unknown>(path);
 
     let result: AllEnvironmentSecretsResponse;
     if (

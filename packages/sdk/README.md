@@ -87,6 +87,21 @@ with an `E2EEResponseError`, never returned as plaintext:
 | `e2ee-plaintext-response` | The server (or something between you and it) answered with unencrypted secrets |
 | `e2ee-decryption-failed` | The envelope was tampered with, malformed, or encrypted to a different key |
 
+The key is presented on **every** read that carries secret values, not only `getAllSecrets`. For those
+without a typed method (a single secret, its versions, a provider's secrets, the exports, global secrets),
+`client.request(path)` GETs any API path through the same authentication and E2EE pipeline and returns
+the decrypted JSON:
+
+```ts
+const client = await createBaxterClient({});
+const item = await client.request<{ key: string; value: string }>(
+  '/api/v1/projects/my-app/environments/prod/providers/vault/secrets/DB_PASSWORD',
+);
+```
+
+An export read this way answers a `{ key: value }` object, whatever `format` asks for: a file is only
+served to a caller that presents no key.
+
 ## Framework integrations
 
 | Framework | Package |
