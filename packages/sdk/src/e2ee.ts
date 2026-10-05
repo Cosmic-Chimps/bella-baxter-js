@@ -175,29 +175,7 @@ export class E2EKeyPair {
 
     const plaintext = await subtle.decrypt({ name: 'AES-GCM', iv: nonce as unknown as BufferSource, tagLength: 128 }, aesKey, combined.buffer as ArrayBuffer);
 
-    const parsed = JSON.parse(new TextDecoder().decode(plaintext));
-
-    // Server returns List<SecretItem> (array of {key, value, ...} objects) for
-    // provider-specific endpoints. Convert to flat Record<string, string>.
-    if (Array.isArray(parsed)) {
-      const result: Record<string, string> = {};
-      for (const item of parsed) {
-        if (typeof item?.key === 'string') result[item.key] = item.value ?? '';
-      }
-      return result;
-    }
-
-    // Full AllEnvironmentSecretsResponse — extract the nested secrets dict.
-    if (
-      typeof parsed === 'object' && parsed !== null &&
-      'secrets' in parsed && typeof (parsed as Record<string, unknown>).secrets === 'object' &&
-      !Array.isArray((parsed as Record<string, unknown>).secrets)
-    ) {
-      return (parsed as Record<string, unknown>).secrets as Record<string, string>;
-    }
-
-    // Legacy / single-secret: already a flat key→value object.
-    return parsed as Record<string, string>;
+    return toSecretsMap(JSON.parse(new TextDecoder().decode(plaintext)));
   }
 
   /**
@@ -241,6 +219,29 @@ export class E2EKeyPair {
 }
 
 // ── Helper ─────────────────────────────────────────────────────────────────────
+
+/**
+ * Flattens decrypted secrets JSON to ``{ key: value }``: an array of ``{key, value, ...}`` items
+ * (provider-specific endpoints), a full response with a nested ``secrets`` object
+ * (AllEnvironmentSecretsResponse), or an already-flat object (legacy / single secret).
+ */
+export function toSecretsMap(parsed: unknown): Record<string, string> {
+  if (Array.isArray(parsed)) {
+    const result: Record<string, string> = {};
+    for (const item of parsed) {
+      if (typeof item?.key === 'string') result[item.key] = item.value ?? '';
+    }
+    return result;
+  }
+  if (
+    typeof parsed === 'object' && parsed !== null &&
+    'secrets' in parsed && typeof (parsed as Record<string, unknown>).secrets === 'object' &&
+    !Array.isArray((parsed as Record<string, unknown>).secrets)
+  ) {
+    return (parsed as Record<string, unknown>).secrets as Record<string, string>;
+  }
+  return parsed as Record<string, string>;
+}
 
 /** Returns ``true`` if the raw response JSON looks like an encrypted payload. */
 export function isE2EPayload(raw: unknown): raw is E2EEncryptedPayload {

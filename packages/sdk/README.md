@@ -78,6 +78,15 @@ const bella = await createBellaConfig({
 });
 ```
 
+The client always presents an E2EE public key when reading secrets (the device key above, or an ephemeral
+one), so the answer **must** be an encrypted envelope that opens with that key. Anything else is refused
+with an `E2EEResponseError`, never returned as plaintext:
+
+| `err.code` | Meaning |
+|---|---|
+| `e2ee-plaintext-response` | The server (or something between you and it) answered with unencrypted secrets |
+| `e2ee-decryption-failed` | The envelope was tampered with, malformed, or encrypted to a different key |
+
 ## Framework integrations
 
 | Framework | Package |

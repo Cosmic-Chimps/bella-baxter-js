@@ -18,6 +18,13 @@ export * from './config.js';
 
 // Re-export E2EE types for consumers that need them directly
 export { E2EKeyPair, isE2EPayload, type E2EEncryptedPayload } from './e2ee.js';
+export {
+  E2EEResponseError,
+  E2EE_PLAINTEXT_RESPONSE,
+  E2EE_DECRYPTION_FAILED,
+  requiresEnvelope,
+  type E2EEResponseErrorCode,
+} from './e2ee-response.js';
 export { BellaClient } from '@bella-baxter/kiota-client';
 export {
   BellaAuthenticationProvider,
