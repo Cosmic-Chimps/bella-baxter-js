@@ -1,8 +1,8 @@
 {
-  "descriptionHash": "8B32A00C6A9FDFF0AE48827F641257D9D58E2324F0C05AB06C22B9AD58742AA10A6D9C0DA5D3BE4B6A8327078E8C5D903186FDEFEFD3756C8F948423408C0479",
+  "descriptionHash": "A75F01F42499F6B4A2B27FC43C8609893B26CC04D45ACBCCE7E6A68341D205379B6CCAC4795B93C5AA27868C559FEE5B02AA5B88965657A461059993954A0F2C",
   "descriptionLocation": "../../../../openapi.json",
   "lockFileVersion": "1.0.0",
-  "kiotaVersion": "1.30.0",
+  "kiotaVersion": "1.35.0",
   "clientClassName": "BellaClient",
   "typeAccessModifier": "Public",
   "clientNamespaceName": "ApiSdk",
@@ -30,5 +30,6 @@
   ],
   "includePatterns": [],
   "excludePatterns": [],
-  "disabledValidationRules": []
+  "disabledValidationRules": [],
+  "allowedExternalOrigins": []
 }
