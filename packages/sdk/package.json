@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@bella-baxter/kiota-client": "workspace:*",
-    "@microsoft/kiota-abstractions": "^1.0.0-0",
-    "@microsoft/kiota-http-fetchlibrary": "^1.0.0-0"
+    "@microsoft/kiota-abstractions": "^1.0.0-preview.106",
+    "@microsoft/kiota-http-fetchlibrary": "^1.0.0-preview.106"
   },
   "devDependencies": {
     "typescript": "^6.0.2",

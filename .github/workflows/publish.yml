@@ -60,7 +60,7 @@ jobs:
 
       - name: Generate Kiota TypeScript client
         run: |
-          dotnet tool install --global Microsoft.OpenApi.Kiota --version 1.30.0
+          dotnet tool install --global Microsoft.OpenApi.Kiota --version 1.35.0
           kiota update -o packages/kiota-client/src/generated
 
       - name: Install dependencies
