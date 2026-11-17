@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/@bella-baxter/sdk)](https://www.npmjs.com/package/@bella-baxter/sdk)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Core TypeScript SDK for [Bella Baxter](https://github.com/Cosmic-Chimps/bella-baxter) — a secure secret management gateway. Provides live-reloading secrets for Node.js apps, HMAC-signed API auth, and optional Zero-Knowledge Encryption (ZKE).
+Core TypeScript SDK for [Bella Baxter](https://github.com/Cosmic-Chimps/bella-baxter) — a secure secret management gateway. Provides live-reloading secrets for Node.js apps, HMAC-signed API auth, and optional device-bound encryption.
 
 ## Installation
 
@@ -45,7 +45,7 @@ bella.destroy();
 | `BELLA_BAXTER_API_KEY` | API key (`bax-...`), obtained from the WebApp or CLI |
 | `BELLA_BAXTER_PROJECT` | Project slug (fallback for `projectSlug` option) |
 | `BELLA_BAXTER_ENV` | Environment slug (fallback for `environmentSlug` option) |
-| `BELLA_BAXTER_PRIVATE_KEY` | PKCS#8 PEM private key for ZKE (optional) |
+| `BELLA_BAXTER_PRIVATE_KEY` | PKCS#8 PEM device private key (optional) |
 
 ## Typed secrets
 
@@ -66,9 +66,9 @@ bella.PORT          // number — not string
 bella.DATABASE_URL  // string
 ```
 
-## Zero-Knowledge Encryption (ZKE)
+## Device-bound encryption
 
-When `BELLA_BAXTER_PRIVATE_KEY` is set (or `privateKey` option), secrets are end-to-end encrypted. The server never sees plaintext values.
+When `BELLA_BAXTER_PRIVATE_KEY` is set (or `privateKey` option), the client presents that device key and secret values are encrypted to it on the way to your process. Each device has its own key registered to a person, so the audit log shows which machine read a secret and you can withdraw a machine. When your organisation requires registered devices, a secret is released only to a registered device.
 
 ```ts
 const bella = await createBellaConfig({

@@ -5,7 +5,7 @@
 
 Kiota-generated TypeScript client for the full [Bella Baxter](https://github.com/Cosmic-Chimps/bella-baxter) REST API — projects, environments, providers, secrets, API keys, and more.
 
-> **Most users should use [`@bella-baxter/sdk`](https://www.npmjs.com/package/@bella-baxter/sdk) instead.** It wraps this client with authentication, live-reloading, and ZKE support out of the box.
+> **Most users should use [`@bella-baxter/sdk`](https://www.npmjs.com/package/@bella-baxter/sdk) instead.** It wraps this client with authentication, live-reloading, and device key support out of the box.
 
 ## Installation
 

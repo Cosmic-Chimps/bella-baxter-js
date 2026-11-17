@@ -59,7 +59,7 @@ declare global {
 | `BELLA_BAXTER_API_KEY` | API key (`bax-...`) |
 | `BELLA_BAXTER_PROJECT` | Project slug |
 | `BELLA_BAXTER_ENV` | Environment slug |
-| `BELLA_BAXTER_PRIVATE_KEY` | Private key for ZKE (optional) |
+| `BELLA_BAXTER_PRIVATE_KEY` | Device private key (optional) |
 
 ## Links
 
