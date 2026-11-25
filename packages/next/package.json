@@ -27,7 +27,8 @@
   },
   "devDependencies": {
     "typescript": "^6.0.2",
-    "@types/node": "^25.5.0"
+    "@types/node": "^25.5.0",
+    "next": "^16.4.5"
   },
   "keywords": [
     "bella-baxter",
