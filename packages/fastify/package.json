@@ -1,6 +1,6 @@
 {
   "name": "@bella-baxter/fastify",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Bella Baxter Fastify plugin \u2014 decorates the Fastify instance with live-reloading secrets",
   "type": "module",
   "main": "./dist/index.js",
